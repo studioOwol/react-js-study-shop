@@ -3,15 +3,26 @@ import Form from '../../../components/form/Form.jsx';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import app from '../../../firebase.js';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../../../store/user/user.slice.js';
 
 const SignIn = () => {
   const navigate = useNavigate();
   const [firebaseError, setFirebaseError] = useState('');
 
+  const dispatch = useDispatch();
+
   const auth = getAuth(app);
   const handleLogin = (email, password) => {
     signInWithEmailAndPassword(auth, email, password)
-      .then((user) => {
+      .then((userCredential) => {
+        dispatch(
+          setUser({
+            email: userCredential.user.email,
+            token: userCredential.user.refreshToken,
+            id: userCredential.user.uid,
+          })
+        );
         navigate('/');
       })
       .catch((error) => {
