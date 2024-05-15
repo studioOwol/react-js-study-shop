@@ -15,7 +15,7 @@ const CartList = () => {
   return (
     <ul className={styles.card_list}>
       {products.map((product) => (
-        <CardItem key={product.id} />
+        <CardItem key={product.id} item={product} />
       ))}
     </ul>
   );
