@@ -5,7 +5,7 @@ import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
 import app from '../../../firebase.js';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../../../store/user/user.slice.js';
-import { setUserId } from 'firebase/analytics';
+import { setUserId } from '../../../store/cart/cart.slice.js';
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -29,6 +29,7 @@ const SignUp = () => {
         navigate('/'); // 메인 페이지로 이동
       })
       .catch((error) => {
+        console.log(error);
         return (
           error && setFirebaseError('이메일 또는 비밀번호가 잘못되었습니다.')
         );

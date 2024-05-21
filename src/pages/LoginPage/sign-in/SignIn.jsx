@@ -5,7 +5,7 @@ import app from '../../../firebase.js';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../../../store/user/user.slice.js';
-import { setUserId } from 'firebase/analytics';
+import { setUserId } from '../../../store/cart/cart.slice.js';
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -28,6 +28,7 @@ const SignIn = () => {
         navigate('/');
       })
       .catch((error) => {
+        console.log(error);
         return (
           error && setFirebaseError('이메일 또는 비밀번호가 잘못되었습니다.')
         );
