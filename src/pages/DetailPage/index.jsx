@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux.js';
 import { fetchProduct } from '../../store/products/product.slice.js';
 import styles from './DetailPage.module.scss';
 import Loader from '../../components/loader/Loader.jsx';
+import { addToCart } from '../../store/cart/cart.slice.js';
 
 const DetailPage = () => {
   const { id } = useParams();
@@ -19,6 +20,10 @@ const DetailPage = () => {
   useEffect(() => {
     dispatch(fetchProduct(productId));
   }, [productId]);
+
+  const addItemToCart = () => {
+    dispatch(addToCart(product));
+  };
 
   return (
     <div className='page'>
@@ -36,7 +41,10 @@ const DetailPage = () => {
             <h4>$ {product.price}</h4>
             <p>{product.description}</p>
             <div>
-              <button disabled={productMatching}>
+              <button
+                disabled={productMatching}
+                onClick={() => !productMatching && addItemToCart()}
+              >
                 {productMatching ? '장바구니에 담긴 제품' : '장바구니에 담기'}
               </button>
               <Link to='/cart'>장바구니로 이동</Link>

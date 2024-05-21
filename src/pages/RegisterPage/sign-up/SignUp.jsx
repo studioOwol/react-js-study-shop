@@ -5,6 +5,7 @@ import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
 import app from '../../../firebase.js';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../../../store/user/user.slice.js';
+import { setUserId } from 'firebase/analytics';
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ const SignUp = () => {
             id: userCredential.user.uid,
           })
         );
-
+        dispatch(setUserId(userCredential.user.uid));
         navigate('/'); // 메인 페이지로 이동
       })
       .catch((error) => {
