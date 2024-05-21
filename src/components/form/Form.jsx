@@ -1,6 +1,5 @@
 import styles from './Form.module.scss';
 import { useForm } from 'react-hook-form';
-import PropTypes from 'prop-types';
 
 const Form = ({ title, getDataForm, firebaseError }) => {
   const {
