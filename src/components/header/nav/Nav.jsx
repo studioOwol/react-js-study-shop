@@ -8,6 +8,7 @@ import app from '../../../firebase.js';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux.js';
 import { removeUser } from '../../../store/user/user.slice.js';
 import { removeUserId } from '../../../store/cart/cart.slice.js';
+import NavCartBlock from './nav-cart-block/NavCartBlock.jsx';
 
 const Nav = () => {
   const { isAuth } = useAuth();
@@ -36,6 +37,11 @@ const Nav = () => {
               <FiShoppingCart />
             </Link>
             {products.length > 0 && <b>{products.length}</b>}
+            {products.length > 0 && (
+              <div className={styles.nav_hover_cart}>
+                <NavCartBlock />
+              </div>
+            )}
           </div>
         </li>
         <li>
